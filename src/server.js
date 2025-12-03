@@ -1,36 +1,37 @@
-import express from 'express';  
+import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import pino from 'pino-http';
+import { connectMongoDB } from './db/connectMongoDB.js';
+import { logger } from './middleware/logger.js';
+import { notFoundHandler } from './middleware/notFoundHandler.js';
+import { errorHandler } from './middleware/errorHandler.js';
+import notesRoutes from './routes/notesRoutes.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// Middleware
+app.use(logger);
 app.use(express.json());
-app.use(pino());
+app.use(cors());
 
-app.get('/notes', (req, res) => {
-    res.status(200).json({ message: 'Retrieved all notes' });
-});
+// Routes
+app.use('/notes', notesRoutes);
 
-app.get('/notes/:noteId', (req, res) => {
-    const { noteId } = req.params;
-    res.status(200).json({ message: `Retrieved note with id ${noteId}` });
-});
+// Error handlers
+app.use(notFoundHandler);
+app.use(errorHandler);
 
-app.get('/test-error', () => {throw new Error('imulated server error');});
-
-app.use((req, res) => {
-    res.status(404).json({ message: 'Route not found' });
-});
-
-app.use((err, req, res, next) => {
-    res.status(500).json({ message: err.message });
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Connect to MongoDB and start server
+connectMongoDB()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error('Failed to start server:', error);
+        process.exit(1);
+    });
