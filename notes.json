@@ -1,0 +1,53 @@
+[
+  {
+    "title": "Meeting with team",
+    "content": "Discuss project progress and next steps",
+    "tag": "Meeting"
+  },
+  {
+    "title": "Buy groceries",
+    "content": "Milk, bread, eggs, vegetables",
+    "tag": "Shopping"
+  },
+  {
+    "title": "Finish project documentation",
+    "content": "Complete API documentation and user guide",
+    "tag": "Work"
+  },
+  {
+    "title": "Vacation ideas",
+    "content": "Research destinations for summer vacation",
+    "tag": "Travel"
+  },
+  {
+    "title": "Gym workout",
+    "content": "Cardio and strength training",
+    "tag": "Health"
+  },
+  {
+    "title": "Budget planning",
+    "content": "Review monthly expenses and create budget",
+    "tag": "Finance"
+  },
+  {
+    "title": "App feature ideas",
+    "content": "Dark mode, notifications, offline support",
+    "tag": "Ideas"
+  },
+  {
+    "title": "Doctor appointment",
+    "content": "Annual checkup scheduled for next week",
+    "tag": "Health"
+  },
+  {
+    "title": "Important deadline",
+    "content": "Submit final report by Friday",
+    "tag": "Important"
+  },
+  {
+    "title": "Personal goals",
+    "content": "Learn new language, read more books",
+    "tag": "Personal"
+  }
+]
+
