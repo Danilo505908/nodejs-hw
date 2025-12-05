@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use('/notes', notesRoutes);
+app.use(notesRoutes);
 
 // Error handlers
 app.use(notFoundHandler);
