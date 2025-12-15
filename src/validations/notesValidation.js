@@ -10,14 +10,15 @@ const customObjectId = (value, helpers) => {
 };
 
 // 1. Створення
-export const createNoteSchema = Joi.object({
-  title: Joi.string().min(1).required(),
-  content: Joi.string().allow(''),
-  tag: Joi.string().valid(...TAGS),
-});
+export const createNoteSchema = {
+  body: Joi.object({
+    title: Joi.string().min(1).required(),
+    content: Joi.string().allow(''),
+    tag: Joi.string().valid(...TAGS),
+  }),
+};
 
-// 2. Оновлення (ОСЬ ТУТ БУЛА ПОМИЛКА)
-// Ми прибрали Joi.object() на початку. Це має бути просто об'єкт.
+// 2. Оновлення
 export const updateNoteSchema = {
   params: Joi.object({
     noteId: Joi.string().custom(customObjectId).required(),
@@ -30,14 +31,18 @@ export const updateNoteSchema = {
 };
 
 // 3. Список
-export const getAllNotesSchema = Joi.object({
-  page: Joi.number().integer().min(1).default(1),
-  perPage: Joi.number().integer().min(5).max(20).default(10),
-  tag: Joi.string().valid(...TAGS),
-  search: Joi.string().allow(''),
-});
+export const getAllNotesSchema = {
+  query: Joi.object({
+    page: Joi.number().integer().min(1).default(1),
+    perPage: Joi.number().integer().min(5).max(20).default(10),
+    tag: Joi.string().valid(...TAGS),
+    search: Joi.string().allow(''),
+  }),
+};
 
 // 4. ID
-export const noteIdSchema = Joi.object({
-  noteId: Joi.string().custom(customObjectId).required(),
-});
+export const noteIdSchema = {
+  params: Joi.object({
+    noteId: Joi.string().custom(customObjectId).required(),
+  }),
+};

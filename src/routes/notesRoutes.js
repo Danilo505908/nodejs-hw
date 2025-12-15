@@ -1,5 +1,5 @@
 import express from 'express';
-import { celebrate, Segments } from 'celebrate';
+import { celebrate } from 'celebrate';
 import {
   createNoteSchema,
   updateNoteSchema,
@@ -18,38 +18,36 @@ const router = express.Router();
 
 // GET /notes (валідація query параметрів: page, perPage, search, tag)
 router.get(
-  '/',
-  celebrate({ [Segments.QUERY]: getAllNotesSchema }),
+  '/notes',
+  celebrate(getAllNotesSchema),
   getAllNotes
 );
 
 // GET /notes/:noteId (валідація ID)
 router.get(
-  '/:noteId',
-  celebrate({ [Segments.PARAMS]: noteIdSchema }),
+  '/notes/:noteId',
+  celebrate(noteIdSchema),
   getNoteById
 );
 
 // POST /notes (валідація body)
 router.post(
-  '/',
-  celebrate({ [Segments.BODY]: createNoteSchema }),
+  '/notes',
+  celebrate(createNoteSchema),
   createNote
 );
 
-// PATCH /notes/:noteId 
-// Ми передаємо updateNoteSchema напряму, оскільки в src/validations/notesValidation.js 
-// вона вже містить об'єкт з ключами { params: ..., body: ... }
+// PATCH /notes/:noteId
 router.patch(
-  '/:noteId',
+  '/notes/:noteId',
   celebrate(updateNoteSchema),
   updateNote
 );
 
 // DELETE /notes/:noteId (валідація ID)
 router.delete(
-  '/:noteId',
-  celebrate({ [Segments.PARAMS]: noteIdSchema }),
+  '/notes/:noteId',
+  celebrate(noteIdSchema),
   deleteNote
 );
 

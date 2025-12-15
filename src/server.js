@@ -20,9 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-// Важливо: ми монтуємо роутер на шляху '/notes'.
-// Це означає, що всі маршрути всередині notesRoutes будуть починатися з /notes
-app.use('/notes', notesRoutes);
+app.use(notesRoutes);
 
 // Error handlers
 // 1. Спочатку обробляємо помилки валідації від Celebrate
