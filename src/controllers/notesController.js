@@ -29,15 +29,11 @@ export const getAllNotes = async (req, res, next) => {
     const totalPages = Math.ceil(totalNotes / perPage);
 
     res.status(200).json({
-      status: 200,
-      message: 'Successfully found notes!',
-      data: {
-        notes,
-        page: Number(page),
-        perPage: Number(perPage),
-        totalNotes,
-        totalPages,
-      },
+      notes,
+      page: Number(page),
+      perPage: Number(perPage),
+      totalNotes,
+      totalPages,
     });
 
   } catch (error) {
