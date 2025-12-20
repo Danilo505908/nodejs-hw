@@ -13,12 +13,14 @@ import {
   updateNote,
   deleteNote,
 } from '../controllers/notesController.js';
+import { authenticate } from '../middleware/authenticate.js';
 
 const router = express.Router();
 
 // GET /notes (валідація query параметрів: page, perPage, search, tag)
 router.get(
   '/notes',
+  authenticate,
   celebrate(getAllNotesSchema),
   getAllNotes
 );
@@ -26,6 +28,7 @@ router.get(
 // GET /notes/:noteId (валідація ID)
 router.get(
   '/notes/:noteId',
+  authenticate,
   celebrate(noteIdSchema),
   getNoteById
 );
@@ -33,6 +36,7 @@ router.get(
 // POST /notes (валідація body)
 router.post(
   '/notes',
+  authenticate,
   celebrate(createNoteSchema),
   createNote
 );
@@ -40,6 +44,7 @@ router.post(
 // PATCH /notes/:noteId
 router.patch(
   '/notes/:noteId',
+  authenticate,
   celebrate(updateNoteSchema),
   updateNote
 );
@@ -47,6 +52,7 @@ router.patch(
 // DELETE /notes/:noteId (валідація ID)
 router.delete(
   '/notes/:noteId',
+  authenticate,
   celebrate(noteIdSchema),
   deleteNote
 );
