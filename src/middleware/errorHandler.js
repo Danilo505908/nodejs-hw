@@ -11,6 +11,12 @@ export const errorHandler = (err, req, res, next) => {
     });
   }
 
+  // Логуємо помилку для дебагу
+  console.error('Error details:');
+  console.error('Message:', err.message);
+  console.error('Stack:', err.stack);
+  console.error('Full error:', err);
+
   // Для інших помилок повертаємо статус 500 і загальне повідомлення
   res.status(500).json({
     message: 'Internal server error',
